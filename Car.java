@@ -3,11 +3,13 @@ import java.awt.Graphics;
 import java.util.*;
 
 public class Car {
-	private static final int SPEED = 10;
+	private static final int BASE_SPEED = 10;
+	private static final int SPEED_VARIATION = 3;
 
 	private Cord path[];
 	private Cord pos;
 	private Color color;
+	private int speed;
 
 	// 1:right, -1:left
 	private int dir;
@@ -18,6 +20,9 @@ public class Car {
 		this.color = color;
 
 		this.dir = (path[0].getX() < path[3].getX()) ? 1 : -1;
+
+		int rand = (int)Math.floor((2*SPEED_VARIATION+1)*Math.random()-SPEED_VARIATION);
+		this.speed = rand + BASE_SPEED;
 	}
 
 	public void draw(Graphics g){
@@ -49,7 +54,7 @@ public class Car {
 			}
 		}
 
-		if(canMove)pos.translate(new Cord(SPEED * dir,0));
+		if(canMove)pos.translate(new Cord(speed * dir,0));
 		return !pos.between(path[0],path[3]);
 	}
 

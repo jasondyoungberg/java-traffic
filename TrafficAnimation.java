@@ -71,6 +71,7 @@ public class TrafficAnimation extends JPanel {
 	// Color setup
 		private final Color BACKGROUND_COLOR = new Color(0,255,0);
 		private final Color ROAD_COLOR = new Color(51,51,51);
+		private final Color CURB_COLOR = new Color(102,102,102);
 		private final Color LINE_COLOR = new Color(255,255,0);
 		private final Color PATH_COLOR = new Color(153,153,153);
 		private final Color CROSSWALK_COLOR = new Color(255,255,255);
@@ -154,6 +155,10 @@ public class TrafficAnimation extends JPanel {
 			{// Draw Background
 				g.setColor(BACKGROUND_COLOR);
 				g.fillRect(0,0,w,h);
+			}
+			{// Draw Curb
+				g.setColor(CURB_COLOR);
+				g.fillRect(0,(h/2) - 110,w,220);
 			}
 			{// Draw Path
 				g.setColor(PATH_COLOR);

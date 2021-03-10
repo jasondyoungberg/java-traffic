@@ -51,10 +51,6 @@ public class Person {
 	}
 
 	public String toString(){
-		String out = "Person with path [";
-		for(Cord pos:path){
-			out += pos + ",";
-		}
-		return out + "] @" + pos;
+		return "Person @" + pos;
 	}
 }

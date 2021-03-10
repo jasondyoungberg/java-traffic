@@ -59,10 +59,6 @@ public class Car {
 	}
 
 	public String toString(){
-		String out = "Car with path [";
-		for(Cord pos:path){
-			out += pos + ",";
-		}
-		return out + "] @" + pos;
+		return "Car @" + pos;
 	}
 }

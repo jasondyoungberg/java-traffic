@@ -152,33 +152,33 @@ public class TrafficAnimation extends JPanel {
 			if(t%1000 == 900)stoplight = -1;
 		}
 		{// Draw Area
-			{// Draw Background
-				g.setColor(BACKGROUND_COLOR);
-				g.fillRect(0,0,w,h);
+			// Draw Background
+			g.setColor(BACKGROUND_COLOR);
+			g.fillRect(0,0,w,h);
+
+			// Draw Curb
+			g.setColor(CURB_COLOR);
+			g.fillRect(0,(h/2) - 110,w,220);
+			
+			// Draw Path
+			g.setColor(PATH_COLOR);
+			g.fillRect((w/2) - 30,0,60,h);
+			
+			// Draw Road
+			g.setColor(ROAD_COLOR);
+			g.fillRect(0,(h/2) - 100,w,200);
+			
+			// Draw Lines
+			g.setColor(LINE_COLOR);
+			g.fillRect(0,(h/2) - 9,w,6);
+			g.fillRect(0,(h/2) + 3,w,6);
+			
+			// Draw Crosswalk
+			g.setColor(CROSSWALK_COLOR);
+			for(int i = (h/2) - 89;i < (h/2) + 100;i += 27){
+				g.fillRect((w/2) - 30,i,60,16);
 			}
-			{// Draw Curb
-				g.setColor(CURB_COLOR);
-				g.fillRect(0,(h/2) - 110,w,220);
-			}
-			{// Draw Path
-				g.setColor(PATH_COLOR);
-				g.fillRect((w/2) - 30,0,60,h);
-			}
-			{// Draw Road
-				g.setColor(ROAD_COLOR);
-				g.fillRect(0,(h/2) - 100,w,200);
-			}
-			{// Draw Lines
-				g.setColor(LINE_COLOR);
-				g.fillRect(0,(h/2) - 9,w,6);
-				g.fillRect(0,(h/2) + 3,w,6);
-			}
-			{// Draw Crosswalk
-				g.setColor(CROSSWALK_COLOR);
-				for(int i = (h/2) - 89;i < (h/2) + 100;i += 27){
-					g.fillRect((w/2) - 30,i,60,16);
-				}
-			}
+			
 		}
 		{// Spawning
 			if(t%SPAWN_RATE == 0){

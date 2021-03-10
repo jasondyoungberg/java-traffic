@@ -67,7 +67,7 @@ public class TrafficAnimation extends JPanel {
 		private final Color BACKGROUND_COLOR = new Color(0,255,0);
 		private final Color ROAD_COLOR = new Color(51,51,51);
 		private final Color LINE_COLOR = new Color(255,255,0);
-		private final Color PATH_COLOR = new Color(204,204,204);
+		private final Color PATH_COLOR = new Color(153,153,153);
 		private final Color CROSSWALK_COLOR = new Color(255,255,255);
 		private final Color PERSON_COLORS[] = {
 			new Color(204,102,102),

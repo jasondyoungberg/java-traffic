@@ -25,16 +25,20 @@ public class Car {
 		this.speed = rand + BASE_SPEED;
 	}
 
+	public Cord getPos(){
+		return pos;
+	}
+
 	public void draw(Graphics g){
 		g.setColor(color);
 		if(dir == 1){
-			g.fillRect(pos.getX()-30,pos.getY()-25,45,50);
-			g.fillOval(pos.getX()-10,pos.getY()-25,50,50);
-			g.fillOval(pos.getX()-40,pos.getY()-25,20,50);
+			g.fillRect(pos.screenX()-30,pos.screenY()-25,45,50);
+			g.fillOval(pos.screenX()-10,pos.screenY()-25,50,50);
+			g.fillOval(pos.screenX()-40,pos.screenY()-25,20,50);
 		}else{
-			g.fillRect(pos.getX()-15,pos.getY()-25,45,50);
-			g.fillOval(pos.getX()-40,pos.getY()-25,50,50);
-			g.fillOval(pos.getX()+20,pos.getY()-25,20,50);
+			g.fillRect(pos.screenX()-15,pos.screenY()-25,45,50);
+			g.fillOval(pos.screenX()-40,pos.screenY()-25,50,50);
+			g.fillOval(pos.screenX()+20,pos.screenY()-25,20,50);
 		}
 	}
 

@@ -36,6 +36,14 @@ public class Cord {
 		return y;
 	}
 
+	public int screenX(){
+		return (TrafficAnimation.width/2)+x;
+	}
+
+	public int screenY(){
+		return (TrafficAnimation.height/2)+y;
+	}
+
 	public String toString(){
 		return "("+x+","+y+")";
 	}

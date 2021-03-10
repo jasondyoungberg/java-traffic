@@ -2,6 +2,7 @@ import java.util.*;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,6 +19,10 @@ public class TrafficAnimation extends JPanel {
 	private int t = 0;
 	private ArrayList<Car> cars = new ArrayList<Car>();
 	private ArrayList<Person> people = new ArrayList<Person>();
+
+	public static int width = 800;
+	public static int height = 600;
+
 	private int stoplight = 0;
 	/*	  |people|  car |
 		-2|green |  red |
@@ -34,32 +39,32 @@ public class TrafficAnimation extends JPanel {
 		private final int SPAWN_CHANCES = 5;
 
 	// Possible Paths
-		private final Cord CAR_PATHS[][] = {
+		private Cord CAR_PATHS[][] = {
 			{
-				new Cord(-100,353),
-				new Cord(300,353),
-				new Cord(350,353),
-				new Cord(900,353)
+				new Cord(-500,53),
+				new Cord(-100,53),
+				new Cord(-50,53),
+				new Cord(500,53)
 			},
 			{
-				new Cord(900,247),
-				new Cord(500,247),
-				new Cord(450,247),
-				new Cord(-100,247)
+				new Cord(500,-53),
+				new Cord(100,-53),
+				new Cord(50,-53),
+				new Cord(-500,-53)
 			}
 		};
-		private final Cord PERSON_PATHS[][] = {
+		private Cord PERSON_PATHS[][] = {
 			{
-				new Cord(385,-100),
-				new Cord(385,180),
-				new Cord(385,185),
-				new Cord(385,700)
+				new Cord(-15,-400),
+				new Cord(-15,-120),
+				new Cord(-15,-115),
+				new Cord(-15,400)
 			},
 			{
-				new Cord(415,700),
-				new Cord(415,420),
-				new Cord(415,415),
-				new Cord(415,-100)
+				new Cord(15,400),
+				new Cord(15,120),
+				new Cord(15,115),
+				new Cord(15,-400)
 			}
 		};
 
@@ -69,6 +74,7 @@ public class TrafficAnimation extends JPanel {
 		private final Color LINE_COLOR = new Color(255,255,0);
 		private final Color PATH_COLOR = new Color(153,153,153);
 		private final Color CROSSWALK_COLOR = new Color(255,255,255);
+		private final Color TEXT_COLOR = new Color(0,0,0);
 		private final Color PERSON_COLORS[] = {
 			new Color(204,102,102),
 			new Color(204,204,102),
@@ -90,8 +96,51 @@ public class TrafficAnimation extends JPanel {
 		private final Color STOPLIGHT_YELLOW_COLOR = new Color(204,204,0);
 		private final Color STOPLIGHT_GREEN_COLOR = new Color(0,204,0);
 
+	public void setupPaths(int w,int h){
+		Cord newCarPaths[][] = {
+			{
+				new Cord(-(w/2) - 100,53),
+				new Cord(-100,53),
+				new Cord(-50,53),
+				new Cord((w/2) + 100,53)
+			},
+			{
+				new Cord((w/2) + 100,-53),
+				new Cord(100,-53),
+				new Cord(50,-53),
+				new Cord(-(w/2) - 100,-53)
+			}
+		};
+		Cord newPersonPaths[][] = {
+			{
+				new Cord(-15,-(h/2) - 100),
+				new Cord(-15,-120),
+				new Cord(-15,-115),
+				new Cord(-15,(h/2) + 100)
+			},
+			{
+				new Cord(15,(h/2) + 100),
+				new Cord(15,120),
+				new Cord(15,115),
+				new Cord(15,-(h/2) - 100)
+			}
+		};;
+
+		CAR_PATHS = newCarPaths;
+		PERSON_PATHS = newPersonPaths;
+	}
+
 	public void paintComponent(Graphics g){
 		t++;
+		int w = getWidth();
+		int h = getHeight();
+
+		if(w != width || h != height){
+			setupPaths(w,h);
+			width = w;
+			height = h;
+		}
+
 		{// Handle Stoplight
 			if(t%1000 == 0)stoplight = 0;
 			if(t%1000 == 50)stoplight = 2;
@@ -103,25 +152,25 @@ public class TrafficAnimation extends JPanel {
 		{// Draw Area
 			{// Draw Background
 				g.setColor(BACKGROUND_COLOR);
-				g.fillRect(0,0,800,600);
+				g.fillRect(0,0,w,h);
 			}
 			{// Draw Path
 				g.setColor(PATH_COLOR);
-				g.fillRect(370,0,60,600);
+				g.fillRect((w/2) - 30,0,60,h);
 			}
 			{// Draw Road
 				g.setColor(ROAD_COLOR);
-				g.fillRect(0,200,800,200);
+				g.fillRect(0,(h/2) - 100,w,200);
 			}
 			{// Draw Lines
 				g.setColor(LINE_COLOR);
-				g.fillRect(0,291,800,6);
-				g.fillRect(0,303,800,6);
+				g.fillRect(0,(h/2) - 9,w,6);
+				g.fillRect(0,(h/2) + 3,w,6);
 			}
 			{// Draw Crosswalk
 				g.setColor(CROSSWALK_COLOR);
-				for(int i=211;i<400;i+=27){
-					g.fillRect(370,i,60,16);
+				for(int i = (h/2) - 89;i < (h/2) + 100;i += 27){
+					g.fillRect((w/2) - 30,i,60,16);
 				}
 			}
 		}
@@ -131,11 +180,25 @@ public class TrafficAnimation extends JPanel {
 				if(rand < SPAWN_CAR){
 					Cord randPath[] = CAR_PATHS[(int)(Math.random() * CAR_PATHS.length)];
 					Color randColor = CAR_COLORS[(int)(Math.random() * CAR_COLORS.length)];
-					cars.add(new Car(randPath,randColor));
+
+					double minDist = Double.MAX_VALUE;
+					for(Car car:cars){
+						double dist = car.getPos().dist(randPath[0]);
+						if(dist<minDist)minDist = dist;
+					}
+
+					if(minDist>100)cars.add(new Car(randPath,randColor));
 				}else if(rand < SPAWN_CAR + SPAWN_PERSON){
 					Cord randPath[] = PERSON_PATHS[(int)(Math.random() * PERSON_PATHS.length)];
 					Color randColor = PERSON_COLORS[(int)(Math.random() * PERSON_COLORS.length)];
-					people.add(new Person(randPath,randColor));
+
+					double minDist = Double.MAX_VALUE;
+					for(Person person:people){
+						double dist = person.getPos().dist(randPath[0]);
+						if(dist<minDist)minDist = dist;
+					}
+
+					if(minDist>50)people.add(new Person(randPath,randColor));
 				}
 			}
 		}
@@ -166,7 +229,7 @@ public class TrafficAnimation extends JPanel {
 			}else{
 				g.setColor(STOPLIGHT_GREEN_COLOR);
 			}
-			g.fillRect(375,285,50,30);
+			g.fillRect((w/2) - 25,(h/2) - 15,50,30);
 
 			if(stoplight>=0){
 				g.setColor(STOPLIGHT_RED_COLOR);
@@ -175,10 +238,17 @@ public class TrafficAnimation extends JPanel {
 			}else{
 				g.setColor(STOPLIGHT_GREEN_COLOR);
 			}
-			g.fillRect(385,275,30,50);
+			g.fillRect((w/2) - 15,(h/2) - 25,30,50);
 
 			g.setColor(STOPLIGHT_BODY_COLOR);
-			g.fillRect(380,280,40,40);
+			g.fillRect((w/2) - 20,(h/2) - 20,40,40);
+		}
+		{// Draw Text
+			g.setColor(TEXT_COLOR);
+			g.setFont(new Font("Roboto",Font.BOLD,24));
+			g.drawString("Can I go?",12,12);
+			g.drawString("Vehicles: " + (stoplight == 2 ? "yes" : stoplight == 1 ? "maybe" : "no"),12,36);
+			g.drawString("Pedestrians: " + (stoplight == -2 ? "yes" : stoplight == -1 ? "maybe" : "no"),12,60);
 		}
 		Toolkit.getDefaultToolkit().sync();
 	}

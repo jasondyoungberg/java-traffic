@@ -25,9 +25,13 @@ public class Person {
 		this.speed = rand + BASE_SPEED;
 	}
 
+	public Cord getPos(){
+		return pos;
+	}
+
 	public void draw(Graphics g){
 		g.setColor(color);
-		g.fillOval(pos.getX()-10,pos.getY()-10,20,20);
+		g.fillOval(pos.screenX()-10,pos.screenY()-10,20,20);
 	}
 
 	public boolean tick(ArrayList<Person> others,int stoplight){

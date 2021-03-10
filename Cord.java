@@ -22,6 +22,7 @@ public class Cord {
 		return Math.sqrt((xDiff * xDiff) + (yDiff * yDiff));
 	}
 
+	// tell if cord is between two other cords
 	public boolean between(Cord a,Cord b){
 		boolean withinX = (a.x <= x && x <= b.x) || (a.x >= x && x >= b.x);
 		boolean withinY = (a.y <= y && y <= b.y) || (a.y >= y && y >= b.y);

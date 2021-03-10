@@ -21,6 +21,7 @@ public class Car {
 
 		this.dir = (path[0].getX() < path[3].getX()) ? 1 : -1;
 
+		// random value from -SPEED_VARIATION to SPEED_VARIATION
 		int rand = (int)Math.floor((2*SPEED_VARIATION+1)*Math.random()-SPEED_VARIATION);
 		this.speed = rand + BASE_SPEED;
 	}
@@ -29,6 +30,7 @@ public class Car {
 		return pos;
 	}
 
+	// draw car
 	public void draw(Graphics g){
 		g.setColor(color);
 		if(dir == 1){
@@ -42,6 +44,8 @@ public class Car {
 		}
 	}
 
+	// calculate movement each frame
+	// delete car if returns true
 	public boolean tick(ArrayList<Car> others,int stoplight){
 		boolean canMove = true;
 
@@ -63,6 +67,6 @@ public class Car {
 	}
 
 	public String toString(){
-		return "Car @" + pos;
+		return "Car " + pos;
 	}
 }

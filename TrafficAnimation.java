@@ -136,6 +136,7 @@ public class TrafficAnimation extends JPanel {
 		int h = getHeight();
 
 		if(w != width || h != height){
+			// if use has resized window fix up paths
 			setupPaths(w,h);
 			width = w;
 			height = h;
@@ -178,26 +179,32 @@ public class TrafficAnimation extends JPanel {
 			if(t%SPAWN_RATE == 0){
 				double rand = Math.random() * SPAWN_CHANCES;
 				if(rand < SPAWN_CAR){
+					// pick random path and color
 					Cord randPath[] = CAR_PATHS[(int)(Math.random() * CAR_PATHS.length)];
 					Color randColor = CAR_COLORS[(int)(Math.random() * CAR_COLORS.length)];
 
+					// find closest car to spawn location
 					double minDist = Double.MAX_VALUE;
 					for(Car car:cars){
 						double dist = car.getPos().dist(randPath[0]);
 						if(dist<minDist)minDist = dist;
 					}
 
+					// only spawn if car is far enough away
 					if(minDist>100)cars.add(new Car(randPath,randColor));
 				}else if(rand < SPAWN_CAR + SPAWN_PERSON){
+					// pick random path and color
 					Cord randPath[] = PERSON_PATHS[(int)(Math.random() * PERSON_PATHS.length)];
 					Color randColor = PERSON_COLORS[(int)(Math.random() * PERSON_COLORS.length)];
 
+					// find closest person to spawn location
 					double minDist = Double.MAX_VALUE;
 					for(Person person:people){
 						double dist = person.getPos().dist(randPath[0]);
 						if(dist<minDist)minDist = dist;
 					}
 
+					// only spawn if person is far enough away
 					if(minDist>50)people.add(new Person(randPath,randColor));
 				}
 			}
@@ -222,6 +229,7 @@ public class TrafficAnimation extends JPanel {
 			for(Person person:people){person.draw(g);}
 		}
 		{// Draw Traffic Light
+			// Light for cars
 			if(stoplight<=0){
 				g.setColor(STOPLIGHT_RED_COLOR);
 			}else if(stoplight == 1){
@@ -231,6 +239,7 @@ public class TrafficAnimation extends JPanel {
 			}
 			g.fillRect((w/2) - 25,(h/2) - 15,50,30);
 
+			// Light for people
 			if(stoplight>=0){
 				g.setColor(STOPLIGHT_RED_COLOR);
 			}else if(stoplight == -1){
@@ -240,6 +249,7 @@ public class TrafficAnimation extends JPanel {
 			}
 			g.fillRect((w/2) - 15,(h/2) - 25,30,50);
 
+			// Main body
 			g.setColor(STOPLIGHT_BODY_COLOR);
 			g.fillRect((w/2) - 20,(h/2) - 20,40,40);
 		}

@@ -34,6 +34,8 @@ public class Person {
 	public void draw(Graphics g){
 		g.setColor(color);
 		g.fillOval(pos.screenX()-10,pos.screenY()-10,20,20);
+		g.setColor(new Color(0,0,0));
+		g.fillOval(pos.screenX()-8,pos.screenY()-8,16,16);
 	}
 
 	// calculate movement each frame

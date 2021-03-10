@@ -42,6 +42,16 @@ public class Car {
 			g.fillOval(pos.screenX()-40,pos.screenY()-25,50,50);
 			g.fillOval(pos.screenX()+20,pos.screenY()-25,20,50);
 		}
+		g.setColor(new Color(0,0,0));
+		if(dir == 1){
+			g.fillRect(pos.screenX()-30,pos.screenY()-20,40,40);
+			g.fillOval(pos.screenX()-5,pos.screenY()-20,40,40);
+			g.fillOval(pos.screenX()-35,pos.screenY()-20,10,40);
+		}else{
+			g.fillRect(pos.screenX()-15,pos.screenY()-20,45,40);
+			g.fillOval(pos.screenX()-35,pos.screenY()-20,40,40);
+			g.fillOval(pos.screenX()+25,pos.screenY()-20,10,40);
+		}
 	}
 
 	// calculate movement each frame

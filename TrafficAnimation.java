@@ -98,37 +98,15 @@ public class TrafficAnimation extends JPanel {
 		private final Color STOPLIGHT_GREEN_COLOR = new Color(0,204,0);
 
 	public void setupPaths(int w,int h){
-		Cord newCarPaths[][] = {
-			{
-				new Cord(-(w/2) - 100,53),
-				new Cord(-100,53),
-				new Cord(-50,53),
-				new Cord((w/2) + 100,53)
-			},
-			{
-				new Cord((w/2) + 100,-53),
-				new Cord(100,-53),
-				new Cord(50,-53),
-				new Cord(-(w/2) - 100,-53)
-			}
-		};
-		Cord newPersonPaths[][] = {
-			{
-				new Cord(-15,-(h/2) - 100),
-				new Cord(-15,-120),
-				new Cord(-15,-115),
-				new Cord(-15,(h/2) + 100)
-			},
-			{
-				new Cord(15,(h/2) + 100),
-				new Cord(15,120),
-				new Cord(15,115),
-				new Cord(15,-(h/2) - 100)
-			}
-		};;
+		CAR_PATHS[0][0] = new Cord(-(w/2) - 100,53);
+		CAR_PATHS[0][3] = new Cord((w/2) + 100,53);
+		CAR_PATHS[1][0] = new Cord((w/2) + 100,-53);
+		CAR_PATHS[1][3] = new Cord(-(w/2) - 100,-53);
 
-		CAR_PATHS = newCarPaths;
-		PERSON_PATHS = newPersonPaths;
+		PERSON_PATHS[0][0] = new Cord(-15,-(h/2) - 100);
+		PERSON_PATHS[0][3] = new Cord(-15,(h/2) + 100);
+		PERSON_PATHS[1][0] = new Cord(15,(h/2) + 100);
+		PERSON_PATHS[1][3] = new Cord(15,-(h/2) - 100);
 	}
 
 	public void paintComponent(Graphics g){

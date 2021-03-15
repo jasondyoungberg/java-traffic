@@ -14,7 +14,7 @@ import javax.swing.Timer;
 
 @SuppressWarnings("serial")
 public class TrafficAnimation extends JPanel {
-	private final int DELAY = 1000/60; //60 fps
+	private final int DELAY = 4; //250 fps
 
 	private int t = 0;
 	private ArrayList<Car> cars = new ArrayList<Car>();
@@ -42,27 +42,27 @@ public class TrafficAnimation extends JPanel {
 		private Cord CAR_PATHS[][] = {
 			{
 				new Cord(-500,53),
-				new Cord(-100,53),
-				new Cord(-50,53),
+				new Cord(-105,53),
+				new Cord(-95,53),
 				new Cord(500,53)
 			},
 			{
 				new Cord(500,-53),
-				new Cord(100,-53),
-				new Cord(50,-53),
+				new Cord(105,-53),
+				new Cord(95,-53),
 				new Cord(-500,-53)
 			}
 		};
 		private Cord PERSON_PATHS[][] = {
 			{
 				new Cord(-15,-400),
-				new Cord(-15,-120),
+				new Cord(-15,-125),
 				new Cord(-15,-115),
 				new Cord(-15,400)
 			},
 			{
 				new Cord(15,400),
-				new Cord(15,120),
+				new Cord(15,125),
 				new Cord(15,115),
 				new Cord(15,-400)
 			}
@@ -122,12 +122,12 @@ public class TrafficAnimation extends JPanel {
 		}
 
 		{// Handle Stoplight
-			if(t%1000 == 0)stoplight = 0;
-			if(t%1000 == 50)stoplight = 2;
-			if(t%1000 == 400)stoplight = 1;
-			if(t%1000 == 500)stoplight = 0;
-			if(t%1000 == 550)stoplight = -2;
-			if(t%1000 == 900)stoplight = -1;
+			if(t%5000 == 0)stoplight = 0;
+			if(t%5000 == 500)stoplight = 2;
+			if(t%5000 == 2000)stoplight = 1;
+			if(t%5000 == 2500)stoplight = 0;
+			if(t%5000 == 3000)stoplight = -2;
+			if(t%5000 == 4500)stoplight = -1;
 		}
 		{// Draw Area
 			// Draw Background

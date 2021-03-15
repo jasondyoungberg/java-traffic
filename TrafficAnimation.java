@@ -221,9 +221,9 @@ public class TrafficAnimation extends JPanel {
 		{// Draw Text
 			g.setColor(TEXT_COLOR);
 			g.setFont(new Font("Roboto",Font.BOLD,24));
-			g.drawString("Can I go?",12,12);
-			g.drawString("Vehicles: " + (stoplight == 2 ? "yes" : stoplight == 1 ? "maybe" : "no"),12,36);
-			g.drawString("Pedestrians: " + (stoplight == -2 ? "yes" : stoplight == -1 ? "maybe" : "no"),12,60);
+			g.drawString("Can I go?",12,32);
+			g.drawString("Vehicles: " + (stoplight == 2 ? "yes" : stoplight == 1 ? "maybe" : "no"),12,56);
+			g.drawString("Pedestrians: " + (stoplight == -2 ? "yes" : stoplight == -1 ? "maybe" : "no"),12,80);
 		}
 		Toolkit.getDefaultToolkit().sync();
 	}

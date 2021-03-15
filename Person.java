@@ -12,10 +12,10 @@ public class Person {
 	// -1:up 1:down
 	private int dir;
 
-	public Person(Cord[] path,Color color){
+	public Person(Cord[] path){
 		this.path = path;
 		this.pos = new Cord(path[0]);
-		this.color = color;
+		this.color = Color.getHSBColor((float)Math.random(),1,1);
 
 		this.dir = (path[0].getY() < path[3].getY()) ? 1 : -1;
 	}

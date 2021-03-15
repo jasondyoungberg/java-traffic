@@ -76,22 +76,6 @@ public class TrafficAnimation extends JPanel {
 		private final Color PATH_COLOR = new Color(153,153,153);
 		private final Color CROSSWALK_COLOR = new Color(255,255,255);
 		private final Color TEXT_COLOR = new Color(0,0,0);
-		private final Color PERSON_COLORS[] = {
-			new Color(204,102,102),
-			new Color(204,204,102),
-			new Color(102,204,102),
-			new Color(102,204,204),
-			new Color(102,102,204),
-			new Color(204,102,204)
-		};
-		private final Color CAR_COLORS[] = {
-			new Color(204,102,102),
-			new Color(204,204,102),
-			new Color(102,204,102),
-			new Color(102,204,204),
-			new Color(102,102,204),
-			new Color(204,102,204)
-		};
 		private final Color STOPLIGHT_BODY_COLOR = new Color(102,102,102);
 		private final Color STOPLIGHT_RED_COLOR = new Color(204,0,0);
 		private final Color STOPLIGHT_YELLOW_COLOR = new Color(204,204,0);
@@ -162,9 +146,8 @@ public class TrafficAnimation extends JPanel {
 			if(t%SPAWN_RATE == 0){
 				double rand = Math.random() * SPAWN_CHANCES;
 				if(rand < SPAWN_CAR){
-					// pick random path and color
+					// pick random path
 					Cord randPath[] = CAR_PATHS[(int)(Math.random() * CAR_PATHS.length)];
-					Color randColor = CAR_COLORS[(int)(Math.random() * CAR_COLORS.length)];
 
 					// find closest car to spawn location
 					double minDist = Double.MAX_VALUE;
@@ -174,11 +157,10 @@ public class TrafficAnimation extends JPanel {
 					}
 
 					// only spawn if car is far enough away
-					if(minDist>100)cars.add(new Car(randPath,randColor));
+					if(minDist>100)cars.add(new Car(randPath));
 				}else if(rand < SPAWN_CAR + SPAWN_PERSON){
-					// pick random path and color
+					// pick random path
 					Cord randPath[] = PERSON_PATHS[(int)(Math.random() * PERSON_PATHS.length)];
-					Color randColor = PERSON_COLORS[(int)(Math.random() * PERSON_COLORS.length)];
 
 					// find closest person to spawn location
 					double minDist = Double.MAX_VALUE;
@@ -188,7 +170,7 @@ public class TrafficAnimation extends JPanel {
 					}
 
 					// only spawn if person is far enough away
-					if(minDist>50)people.add(new Person(randPath,randColor));
+					if(minDist>50)people.add(new Person(randPath));
 				}
 			}
 		}

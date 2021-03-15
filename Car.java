@@ -12,10 +12,10 @@ public class Car {
 	// 1:right, -1:left
 	private int dir;
 
-	public Car(Cord[] path,Color color){
+	public Car(Cord[] path){
 		this.path = path;
 		this.pos = new Cord(path[0]);
-		this.color = color;
+		this.color = Color.getHSBColor((float)Math.random(),1,1);
 
 		this.dir = (path[0].getX() < path[3].getX()) ? 1 : -1;
 	}
